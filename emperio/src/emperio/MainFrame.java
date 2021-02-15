@@ -112,6 +112,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void CrytpingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrytpingButtonActionPerformed
         // TODO add your handling code here:
+        CryptingFrame t=new CryptingFrame();
+        t.setVisible(true);
+        this.hide();
     }//GEN-LAST:event_CrytpingButtonActionPerformed
 
     private void MarksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarksButtonActionPerformed

@@ -15,22 +15,25 @@ import java.util.Date;
  * @author ROSS
  */
 public class codes {
-    private final int id;
+    private final String id;
+    private final String cd1;
+    private final String cd2;  
     private final String fname;
     private final String lname;
-    private final Date datd;
-    private final String spec;
-    private final String code;
+    private final String datd;
+    private final String univ;
     
-    public codes(int MAT, String Firstname ,String Lastname,Date Birthdate,String Mat,String codei){
-     this.id=MAT; this.fname=Firstname; this.lname=Lastname; this.datd=Birthdate; this.spec=Mat;this.code=codei;
+    
+    public codes(String MAT, String Firstname ,String Lastname,String Mat,String codei,String Birthdate,String ass){
+     this.id=MAT; this.cd1=Firstname; this.cd2=Lastname;  this.fname=Mat;this.lname=codei;this.datd=Birthdate; this.univ=ass;
     }
     
-   public int getMAT(){return id;}
-     public String getFirstname(){return fname;}
-     public String getLastname(){return lname;}
-     public String getMat(){return spec;}
-     public Date getdate(){return datd;} 
-     public String getcode(){return code;} 
+   public String getMAT(){return id;}
+     public String getFirstname(){return cd1;}
+     public String getLastname(){return cd2;}
+     public String getMat(){return fname;} 
+     public String getcodei(){return lname;} 
+     public String getdate(){return datd;}
+     public String getass(){return univ;} 
     
 }
