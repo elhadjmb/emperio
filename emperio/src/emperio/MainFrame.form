@@ -126,6 +126,7 @@
         <Property name="text" type="java.lang.String" value="&#x627;&#x644;&#x627;&#x639;&#x62f;&#x627;&#x62f;&#x627;&#x62a;"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SettingButtonMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SettingButtonActionPerformed"/>
       </Events>
     </Component>

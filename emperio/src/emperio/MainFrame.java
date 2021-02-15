@@ -72,6 +72,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         SettingButton.setText("الاعدادات");
+        SettingButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SettingButtonMouseClicked(evt);
+            }
+        });
         SettingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SettingButtonActionPerformed(evt);
@@ -142,7 +147,8 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SettingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingButtonActionPerformed
-        // TODO add your handling code here:
+    new SettingsFrame().setVisible(true);
+    // TODO add your handling code here:
     }//GEN-LAST:event_SettingButtonActionPerformed
 
     private void CrytpingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrytpingButtonActionPerformed
@@ -164,6 +170,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
      System.exit(1);
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void SettingButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SettingButtonMouseClicked
 
     /**
      * @param args the command line arguments
