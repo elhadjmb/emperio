@@ -150,7 +150,7 @@ public class CryptingFrame extends javax.swing.JFrame {
     private static void readCsv()
     {
  
-        try (CSVReader reader = new CSVReader(new FileReader("fich1.csv"), ','); 
+        try (CSVReader reader = new CSVReader(new FileReader("data.csv"), ','); 
                      Connection connection = dbconn.ConnectDB();)
         {
                 String insertQuery = "Insert into codi (id,cd1, cd2, fname,lname,datd,univ) values (?,?,?,?,?,?,?)";
@@ -252,7 +252,7 @@ public void execute(String sql, String message) {
                 DefaultTableModel mode1 = (DefaultTableModel) tablee.getModel();
                 mode1.setRowCount(0);
                 display();
-                JOptionPane.showMessageDialog(null, "letudiant " + message + " ");
+                
                 
 
             } 
