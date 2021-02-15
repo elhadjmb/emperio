@@ -149,11 +149,13 @@ public class MarksFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
-      new   MarksFrame().setVisible(true);        // TODO add your handling code here:
+        if (jRadioButton1.isSelected()){
+        new   MarksFrame().setVisible(true); }       // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1MouseClicked
 
     private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
-      new   MarksFrame2().setVisible(true);        // TODO add your handling code here:
+      if (jRadioButton2.isSelected()){
+        new   MarksFrame2().setVisible(true); }       // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
