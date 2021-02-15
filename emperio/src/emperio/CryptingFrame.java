@@ -108,7 +108,7 @@ public class CryptingFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(183, 183, 183)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(DownloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -138,7 +138,7 @@ public class CryptingFrame extends javax.swing.JFrame {
                 .addComponent(CryptingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(DownloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
         );
@@ -178,7 +178,32 @@ public class CryptingFrame extends javax.swing.JFrame {
         }
  
     }
-    	
+  public static String code(char department, int limit) {
+
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
+
+        limit -= 1;
+
+        codeGen.count++;
+
+        StringBuilder sb = new StringBuilder(limit);
+
+        for (int i = 0; i < limit; i++) {
+
+            int index
+                    = (int) (AlphaNumericString.length()
+                    * Math.random());
+
+            sb.append(AlphaNumericString
+                    .charAt(index));
+        }
+
+        String cod = department + sb.toString() + String.valueOf(codeGen.count);
+
+        return cod;
+    }  	
 
 public ArrayList<codes> getTeachersList() {
         ArrayList<codes> teachersList = new ArrayList<>();
@@ -216,6 +241,25 @@ public void display() {
             mode1.addRow(row);
         }
     }
+public void execute(String sql, String message) {
+        Connection conn = dbconn.ConnectDB();
+        Statement st;
+        try {
+            st = conn.createStatement();
+            if (1 == st.executeUpdate(sql)) {
+
+                //refrech 
+                DefaultTableModel mode1 = (DefaultTableModel) tablee.getModel();
+                mode1.setRowCount(0);
+                display();
+                JOptionPane.showMessageDialog(null, "letudiant " + message + " ");
+                
+
+            } 
+        } catch (SQLException | HeadlessException e) {
+        }
+
+    }
     private void UploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadButtonActionPerformed
         // TODO add your handling code here:
         readCsv();
@@ -223,8 +267,13 @@ public void display() {
 
     private void CryptingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CryptingButtonActionPerformed
         // TODO add your handling code here:
-        
+        for (int i = 1; i < 50; i++) {
+   
+        String sql = "UPDATE `codi` SET `cd1`='" + code('D',4) + "',`cd2`='" + code('D',4) + "' WHERE `id`=" + String.valueOf(i);
+        execute(sql, "updated"); 
         display();
+        }
+        
     }//GEN-LAST:event_CryptingButtonActionPerformed
 
     private void DownloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DownloadButtonActionPerformed
