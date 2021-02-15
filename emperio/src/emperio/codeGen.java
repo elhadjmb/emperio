@@ -1,9 +1,12 @@
 package emperio;
 
+import javax.swing.table.DefaultTableModel;
+
 public class codeGen {
 
     public static int count = 1;
 
+    //code limit = 4
     public static String code(char department, int limit) {
 
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -31,9 +34,21 @@ public class codeGen {
         return cod;
     }
 
-    public static void main(String[] args) {
-        System.out.println(codeGen.code('A', 3));
-        System.out.println(codeGen.code('B', 3));
+    public static void join(int table, char department) {
+        int limit = 15; //nbr of rows in table
+
+        // add empty column "the_code"
+
+        // go through each row
+        for (int i = 0; i < limit; i++) {
+            int y = 0;
+            // generate a code
+            // assign code in the empty column of "the_code"
+        }
     }
+
+    public static void main(String[] args) {
+    }
+
 }
 
