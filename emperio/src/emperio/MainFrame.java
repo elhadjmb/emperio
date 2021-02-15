@@ -167,7 +167,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_CrytpingButtonMouseClicked
 
     private void MarksButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MarksButtonMouseClicked
-      new   MarksFrame().setVisible(true);// TODO add your handling code here:
+      new   Login2().setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_MarksButtonMouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
