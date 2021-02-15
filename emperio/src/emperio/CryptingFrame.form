@@ -25,15 +25,23 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="DownloadButton" min="-2" pref="295" max="-2" attributes="0"/>
-                  <Component id="CryptingButton" min="-2" pref="253" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="1154" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="70" max="-2" attributes="0"/>
-                  <Component id="UploadButton" alignment="1" min="-2" pref="253" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="1154" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="259" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                      <Component id="CryptingButton" min="-2" pref="253" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="UploadButton" min="-2" pref="253" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="70" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace pref="190" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel4" min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -47,14 +55,16 @@
                       <Component id="jLabel1" min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel4" alignment="0" min="-2" pref="47" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Component id="UploadButton" min="-2" pref="42" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-              <Component id="UploadButton" min="-2" pref="42" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="CryptingButton" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace pref="72" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="352" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+              <EmptySpace pref="169" max="32767" attributes="0"/>
               <Component id="DownloadButton" min="-2" pref="48" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
           </Group>
@@ -69,17 +79,23 @@
         <Component class="javax.swing.JTable" name="tablee">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="4">
-                <Column editable="true" title="&#x627;&#x644;&#x634;&#x641;&#x631;&#x629;" type="java.lang.Object"/>
-                <Column editable="true" title="&#x627;&#x644;&#x62a;&#x62e;&#x635;&#x635;" type="java.lang.Object"/>
-                <Column editable="true" title="&#x62a;&#x627;&#x631;&#x64a;&#x62c; &#x627;&#x644;&#x645;&#x64a;&#x644;&#x627;&#x62f;" type="java.lang.Object"/>
-                <Column editable="true" title="&#x627;&#x644;&#x644;&#x642;&#x628;" type="java.lang.Object"/>
-                <Column editable="true" title="&#x627;&#x644;&#x627;&#x633;&#x645;" type="java.lang.Object"/>
-                <Column editable="true" title="&#x627;&#x644;&#x631;&#x642;&#x645;" type="java.lang.Object"/>
+              <Table columnCount="7" rowCount="4">
+                <Column editable="true" title="id" type="java.lang.Object"/>
+                <Column editable="true" title="cd1" type="java.lang.Object"/>
+                <Column editable="true" title="cd2" type="java.lang.Object"/>
+                <Column editable="true" title="fname" type="java.lang.Object"/>
+                <Column editable="true" title="lname" type="java.lang.Object"/>
+                <Column editable="true" title="datd" type="java.lang.Object"/>
+                <Column editable="true" title="univ" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

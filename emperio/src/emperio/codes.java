@@ -29,10 +29,10 @@ public class codes {
     }
     
    public String getMAT(){return id;}
-     public String getFirstname(){return cd1;}
-     public String getLastname(){return cd2;}
-     public String getMat(){return fname;} 
-     public String getcodei(){return lname;} 
+     public String getFname(){return fname;}
+     public String getLname(){return lname;}
+     public String getc1(){return cd1;} 
+     public String getc2(){return cd2;} 
      public String getdate(){return datd;}
      public String getass(){return univ;} 
     
