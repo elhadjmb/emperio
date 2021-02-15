@@ -5,6 +5,12 @@
  */
 package emperio;
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author kadi
@@ -71,12 +77,17 @@ public class MarksFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "المعدل ", "المادة2", "المادة 1", "الرمز السري"
+                "code", "module1", "module2", "moy"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("فك التشفير");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -161,6 +172,29 @@ public class MarksFrame extends javax.swing.JFrame {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
       System.exit(1);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+     
+        
+        Connection conn = dbconn.ConnectDB();
+        Statement st;
+        try {
+            st = conn.createStatement();
+            if (1 == st.executeUpdate("SELECT note(code,note1,note2) FROM note INNER JOIN codi ON codi.id = note.id;")) {
+
+                //refrech 
+                DefaultTableModel mode1 = (DefaultTableModel) codi.getModel();
+                mode1.setRowCount(0);
+                
+                
+                
+
+            } 
+        } catch (SQLException | HeadlessException e) {
+        }
+
+    }       // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
