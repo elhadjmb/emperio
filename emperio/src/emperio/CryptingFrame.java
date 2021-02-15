@@ -278,6 +278,14 @@ public void execute(String sql, String message) {
 
     private void DownloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DownloadButtonActionPerformed
         // TODO add your handling code here:
+        try {
+            String report="C:\\Users\\ROSS\\emperio\\emperio\\fuck.jrxml";
+            JasperReport jr = JasperCompileManager.compileReport(report);
+            JasperPrint jp=JasperFillManager.fillReport(jr, null,dbconn.ConnectDB());
+            JasperViewer.viewReport(jp);
+        } catch (JRException ex) {
+            java.util.logging.Logger.getLogger(codes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_DownloadButtonActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
