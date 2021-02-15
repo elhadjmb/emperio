@@ -4,7 +4,27 @@
  * and open the template in the editor.
  */
 package emperio;
-
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import com.opencsv.CSVReader;
+import java.io.FileReader;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author kadi
@@ -107,12 +127,82 @@ public class CryptingFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private static void readCsv()
+    {
+ 
+        try (CSVReader reader = new CSVReader(new FileReader("fich1.csv"), ','); 
+                     Connection connection = dbconn.ConnectDB();)
+        {
+                String insertQuery = "Insert into codi (id,cd1, cd2, fname,lname,datd,univ) values (?,?,?,?,?,?,?)";
+                PreparedStatement pstmt = connection.prepareStatement(insertQuery);
+                String[] rowData = null;
+                int i = 0;
+                while((rowData = reader.readNext()) != null)
+                {
+                    for (String data : rowData)
+                    {
+                            pstmt.setString((i % 7) + 1, data);
+ 
+                            if (++i % 7 == 0)
+                                    pstmt.addBatch();// add batch
+ 
+                            if (i % 70 == 0)// insert when the batch size is 10
+                                    pstmt.executeBatch();
+                    }
+                }
+                System.out.println("Data Successfully Uploaded");
+        }
+        catch (Exception e)
+        {
+                e.printStackTrace();
+        }
+ 
+    }
+    	
+
+public ArrayList<codes> getTeachersList() {
+        ArrayList<codes> teachersList = new ArrayList<>();
+        Connection conn = dbconn.ConnectDB();
+        String sql = "SELECT * FROM `code`";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            codes teach;
+            while (rs.next()) {
+                teach = new codes(rs.getString("id"), rs.getString("cd1"), rs.getString("cd2"), rs.getString("fname"), rs.getString("lname"), rs.getString("datd"), rs.getString("univ"));
+                teachersList.add(teach);
+            }
+        } catch (Exception e) {
+        }
+        return teachersList;
+    }
+
+
+
+public void display() {
+        ArrayList<codes> list = getTeachersList();
+        DefaultTableModel mode1 = (DefaultTableModel) tablee.getModel();
+        Object[] row = new Object[5];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getMAT();
+            row[1] = list.get(i).getMat();
+            row[2] = list.get(i).getcodei();
+            row[3] = list.get(i).getdate();
+            row[4] = list.get(i).getass();
+            row[5] = list.get(i).getFirstname();
+            mode1.addRow(row);
+        }
+    }
     private void UploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadButtonActionPerformed
         // TODO add your handling code here:
+        readCsv();
     }//GEN-LAST:event_UploadButtonActionPerformed
 
     private void CryptingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CryptingButtonActionPerformed
         // TODO add your handling code here:
+        display();
     }//GEN-LAST:event_CryptingButtonActionPerformed
 
     private void DownloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DownloadButtonActionPerformed
