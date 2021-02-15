@@ -28,7 +28,7 @@ public class CryptingFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablee = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         UploadButton = new javax.swing.JButton();
         CryptingButton = new javax.swing.JButton();
@@ -37,7 +37,7 @@ public class CryptingFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1500, 800));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -48,7 +48,7 @@ public class CryptingFrame extends javax.swing.JFrame {
                 "الشفرة", "التخصص", "تاريج الميلاد", "اللقب", "الاسم", "الرقم"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablee);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 25)); // NOI18N
         jLabel1.setText("التشفير");
@@ -160,6 +160,6 @@ public class CryptingFrame extends javax.swing.JFrame {
     private javax.swing.JButton UploadButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablee;
     // End of variables declaration//GEN-END:variables
 }
