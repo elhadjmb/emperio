@@ -93,7 +93,7 @@ public class MarksFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "code", "module1", "module2", "moy"
+                "الشفرة", "المادة1", "المادة2", "المعدل"
             }
         ));
         jScrollPane1.setViewportView(tablee);

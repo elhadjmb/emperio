@@ -92,7 +92,7 @@ public class MarksFrame2 extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "code", "moyenne"
+                "الشفرة", "النقطة"
             }
         ));
         jScrollPane1.setViewportView(tablee);

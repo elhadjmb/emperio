@@ -71,7 +71,7 @@ public class CryptingFrame extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "cd1", "cd2", "fname", "lname", "datd", "univ"
+                "رقم", "شفرة", "شفرة اللجنة", "الاسم", "اللقب", "تاريخ الميﻻد", "الشعبة"
             }
         ));
         jScrollPane1.setViewportView(tablee);

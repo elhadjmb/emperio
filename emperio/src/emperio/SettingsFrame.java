@@ -28,8 +28,6 @@ public class SettingsFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        moduleComboBox = new javax.swing.JComboBox<>();
-        moduleLabel = new javax.swing.JLabel();
         departementText = new javax.swing.JTextField();
         departementLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -40,16 +38,6 @@ public class SettingsFrame extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
         jLabel1.setText("تعديل الاعدادات");
-
-        moduleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Math", "Logic" }));
-        moduleComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moduleComboBoxActionPerformed(evt);
-            }
-        });
-
-        moduleLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        moduleLabel.setText("المقياس");
 
         departementText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,13 +68,9 @@ public class SettingsFrame extends javax.swing.JFrame {
                         .addGap(69, 69, 69)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(departementText, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(moduleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(departementText, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(moduleLabel)
-                            .addComponent(departementLabel))
+                        .addComponent(departementLabel)
                         .addGap(393, 393, 393))))
         );
         layout.setVerticalGroup(
@@ -101,20 +85,12 @@ public class SettingsFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(departementText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(departementLabel))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(moduleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(moduleLabel))
-                .addContainerGap(373, Short.MAX_VALUE))
+                .addContainerGap(429, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void moduleComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moduleComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_moduleComboBoxActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         this.dispose();
@@ -164,7 +140,5 @@ public class SettingsFrame extends javax.swing.JFrame {
     private javax.swing.JTextField departementText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JComboBox<String> moduleComboBox;
-    private javax.swing.JLabel moduleLabel;
     // End of variables declaration//GEN-END:variables
 }
