@@ -23,6 +23,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.*;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -152,6 +153,17 @@ public class CryptingFrame extends javax.swing.JFrame {
 
     private static void readCsv()
     {
+        JFileChooser chooser = new JFileChooser();
+    chooser.setCurrentDirectory(new java.io.File("."));
+    chooser.setDialogTitle("choosertitle");
+    chooser.setAcceptAllFileFilterUsed(false);
+    
+    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+      System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
+      System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+    } else {
+      System.out.println("No Selection ");
+    }
  
         try (CSVReader reader = new CSVReader(new FileReader("data.csv"), ','); 
                      Connection connection = dbconn.ConnectDB();)
