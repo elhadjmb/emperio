@@ -117,7 +117,7 @@ public class SettingsFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_moduleComboBoxActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        System.exit(1);
+        this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void departementTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departementTextActionPerformed

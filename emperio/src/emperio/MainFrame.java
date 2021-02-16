@@ -170,7 +170,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_MarksButtonMouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-     System.exit(1);
+     this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void SettingButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingButtonMouseClicked

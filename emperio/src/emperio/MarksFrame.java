@@ -262,7 +262,7 @@ private static void readCsv()
     }//GEN-LAST:event_jRadioButton2MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-      System.exit(1);        // TODO add your handling code here:
+      this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
