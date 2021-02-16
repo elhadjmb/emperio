@@ -171,6 +171,7 @@
         <Property name="text" type="java.lang.String" value="&#x62a;&#x623;&#x643;&#x64a;&#x62f; &#x627;&#x644;&#x645;&#x639;&#x62f;&#x644;&#x627;&#x62a; &#x645;&#x639; &#x62d;&#x633;&#x627;&#x628; &#x627;&#x644;&#x646;&#x642;&#x627;&#x637;"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jToggleButton2MouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton2ActionPerformed"/>
       </Events>
     </Component>
@@ -197,8 +198,8 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
+            <StringItem index="0" value="&#x645;&#x627;&#x62f;&#x629; 1"/>
+            <StringItem index="1" value="&#x645;&#x627;&#x62f;&#x629; 2"/>
           </StringArray>
         </Property>
       </Properties>

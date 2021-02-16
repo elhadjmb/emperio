@@ -105,6 +105,11 @@ public class MarksFrame2 extends javax.swing.JFrame {
         });
 
         jToggleButton2.setText("تأكيد المعدلات مع حساب النقاط");
+        jToggleButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jToggleButton2MouseClicked(evt);
+            }
+        });
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
@@ -126,7 +131,7 @@ public class MarksFrame2 extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "مادة 1", "مادة 2" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -325,6 +330,19 @@ private static void readCsv()
         display2();
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jToggleButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton2MouseClicked
+                int modul = jComboBox1.getSelectedIndex();
+        Connection conn = dbconn.ConnectDB();
+        try {
+            String sql = "select codi.cd1, marks.mat"+String.valueOf(modul+1)+" from codi inner join marks on codi.id = marks.id ";
+            Statement st;
+            ResultSet rs;
+        
+        } catch (Exception e) {
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton2MouseClicked
 
     /**
      * @param args the command line arguments

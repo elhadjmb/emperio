@@ -169,7 +169,7 @@ public class MarksFrame extends javax.swing.JFrame {
 public ArrayList<marks> getTeachersList() {
         ArrayList<marks> teachersList = new ArrayList<>();
         Connection conn = dbconn.ConnectDB();
-        String sql = " select codi.cd1, marks.mat1, marks.mat2, marks.moy from codi inner join marks on codi.id = marks.id ";
+        String sql = "select codi.cd1, marks.mat1, marks.mat2, marks.moy from codi inner join marks on codi.id = marks.id ";
         Statement st;
         ResultSet rs;
         try {
