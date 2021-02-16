@@ -5,10 +5,21 @@
  */
 package emperio;
 
+import com.opencsv.CSVReader;
+import static emperio.CryptingFrame.code;
 import java.awt.HeadlessException;
+import java.awt.print.PrinterException;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,7 +48,7 @@ public class MarksFrame extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablee = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -68,8 +79,13 @@ public class MarksFrame extends javax.swing.JFrame {
                 jRadioButton2MouseClicked(evt);
             }
         });
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -80,9 +96,14 @@ public class MarksFrame extends javax.swing.JFrame {
                 "code", "module1", "module2", "moy"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablee);
 
         jButton2.setText("تنزيل النتائج");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabel4.setText("x");
@@ -145,7 +166,87 @@ public class MarksFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+public ArrayList<marks> getTeachersList() {
+        ArrayList<marks> teachersList = new ArrayList<>();
+        Connection conn = dbconn.ConnectDB();
+        String sql = " select codi.cd1, marks.mat1, marks.mat2, marks.moy from codi inner join marks on codi.id = marks.id ";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            marks teach;
+            while (rs.next()) {
+                teach = new marks(rs.getString("cd1"), rs.getInt("mat1"), rs.getInt("mat2"), rs.getInt("moy"));
+                teachersList.add(teach);
+            }
+        } catch (Exception e) {
+        }
+        return teachersList;
+    }
+    public void display() {
+        ArrayList<marks> list = getTeachersList();
+        DefaultTableModel mode1 = (DefaultTableModel) tablee.getModel();
+        Object[] row = new Object[4];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getMAT();
+            row[1] = list.get(i).getm1();
+            row[2] = list.get(i).getm2();
+            row[3] = list.get(i).getmo();
+            
+            mode1.addRow(row);
+        }
+    }
+public void execute(String sql, String message) {
+        Connection conn = dbconn.ConnectDB();
+        Statement st;
+        try {
+            st = conn.createStatement();
+            if (1 == st.executeUpdate(sql)) {
 
+                //refrech 
+                DefaultTableModel mode1 = (DefaultTableModel) tablee.getModel();
+                mode1.setRowCount(0);
+                display();
+                
+                
+
+            } 
+        } catch (SQLException | HeadlessException e) {
+        }
+}
+private static void readCsv()
+    {
+ 
+        try (CSVReader reader = new CSVReader(new FileReader("dataui2.csv"), ','); 
+                     Connection connection = dbconn.ConnectDB();)
+        {
+                String insertQuery = "Insert into marks (id,mat1, mat2, moy) values (?,?,?,?)";
+                PreparedStatement pstmt = connection.prepareStatement(insertQuery);
+                String[] rowData = null;
+                int i = 0;
+                while((rowData = reader.readNext()) != null)
+                {
+                    for (String data : rowData)
+                    {
+                            pstmt.setString((i % 4) + 1, data);
+ 
+                            if (++i % 4 == 0)
+                                    pstmt.addBatch();// add batch
+ 
+                            if (i % 40 == 0)// insert when the batch size is 10
+                                    pstmt.executeBatch();
+                    }
+                }
+                System.out.println("Data Successfully Uploaded");
+        }
+        catch (Exception e)
+        {
+                e.printStackTrace();
+        }
+ 
+    }
+    
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
@@ -166,7 +267,30 @@ public class MarksFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        readCsv();
+        display();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+          
+        
+         try {
+            boolean print = tablee.print();
+            if (!print) {
+                JOptionPane.showMessageDialog(null, "Unable To Print !!..");
+            }
+        } catch (PrinterException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,6 +335,6 @@ public class MarksFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablee;
     // End of variables declaration//GEN-END:variables
 }

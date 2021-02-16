@@ -5,6 +5,17 @@
  */
 package emperio;
 
+import com.opencsv.CSVReader;
+import java.awt.HeadlessException;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author kadi
@@ -31,13 +42,13 @@ public class MarksFrame2 extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablee = new javax.swing.JTable();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -73,14 +84,7 @@ public class MarksFrame2 extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -88,10 +92,10 @@ public class MarksFrame2 extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "الرمز السري", "النقطة"
+                "code", "moyenne"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablee);
 
         jToggleButton1.setText("تنزيل ملف النقاط");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +126,13 @@ public class MarksFrame2 extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -140,8 +151,8 @@ public class MarksFrame2 extends javax.swing.JFrame {
                         .addGap(45, 45, 45)
                         .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(114, 114, 114))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -178,25 +189,116 @@ public class MarksFrame2 extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+public ArrayList<marks> getTeachersList() {
+        ArrayList<marks> teachersList = new ArrayList<>();
+        Connection conn = dbconn.ConnectDB();
+        String sql = " select codi.cd1, marks.mat1,marks.mat2,marks.moy  from codi inner join marks on codi.id = marks.id ";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            marks teach;
+            while (rs.next()) {
+                teach = new marks(rs.getString("cd1"), rs.getInt("mat1"), rs.getInt("mat2"), rs.getInt("moy"));
+                teachersList.add(teach);
+            }
+        } catch (Exception e) {
+        }
+        return teachersList;
+    }
+    public void display() {
+        ArrayList<marks> list = getTeachersList();
+        DefaultTableModel mode1 = (DefaultTableModel) tablee.getModel();
+        Object[] row = new Object[2];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getMAT();
+            row[1] = list.get(i).getm1();
+            
+            
+            mode1.addRow(row);
+        }
+    }
+    public void display2() {
+        ArrayList<marks> list = getTeachersList();
+        DefaultTableModel mode1 = (DefaultTableModel) tablee.getModel();
+        Object[] row = new Object[2];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getMAT();
+            row[1] = list.get(i).getm2();
+            
+            
+            mode1.addRow(row);
+        }
+    }
+public void execute(String sql, String message) {
+        Connection conn = dbconn.ConnectDB();
+        Statement st;
+        try {
+            st = conn.createStatement();
+            if (1 == st.executeUpdate(sql)) {
 
+                //refrech 
+                DefaultTableModel mode1 = (DefaultTableModel) tablee.getModel();
+                mode1.setRowCount(0);
+                display();
+                
+                
+
+            } 
+        } catch (SQLException | HeadlessException e) {
+        }
+}
+private static void readCsv()
+    {
+ 
+        try (CSVReader reader = new CSVReader(new FileReader("data.csv"), ','); 
+                     Connection connection = dbconn.ConnectDB();)
+        {
+                String insertQuery = "Insert into marks (id,mat1, mat2, moy) values (?,?,?,?)";
+                PreparedStatement pstmt = connection.prepareStatement(insertQuery);
+                String[] rowData = null;
+                int i = 0;
+                while((rowData = reader.readNext()) != null)
+                {
+                    for (String data : rowData)
+                    {
+                            pstmt.setString((i % 4) + 1, data);
+ 
+                            if (++i % 4 == 0)
+                                    pstmt.addBatch();// add batch
+ 
+                            if (i % 40 == 0)// insert when the batch size is 10
+                                    pstmt.executeBatch();
+                    }
+                }
+                System.out.println("Data Successfully Uploaded");
+        }
+        catch (Exception e)
+        {
+                e.printStackTrace();
+        }
+ 
+    }
+    
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
+        display();
+        
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
@@ -217,6 +319,12 @@ public class MarksFrame2 extends javax.swing.JFrame {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
      System.exit(1);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        display2();
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,9 +369,9 @@ public class MarksFrame2 extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JTable tablee;
     // End of variables declaration//GEN-END:variables
 }

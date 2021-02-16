@@ -18,7 +18,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import com.opencsv.CSVReader;
+import java.awt.print.PrinterException;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -277,13 +281,54 @@ public void execute(String sql, String message) {
 
     private void DownloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DownloadButtonActionPerformed
         // TODO add your handling code here:
-        try {
-            String report="C:\\Users\\ROSS\\emperio\\emperio\\fuck.jrxml";
-            JasperReport jr = JasperCompileManager.compileReport(report);
-            JasperPrint jp=JasperFillManager.fillReport(jr, null,dbconn.ConnectDB());
-            JasperViewer.viewReport(jp);
-        } catch (JRException ex) {
-            java.util.logging.Logger.getLogger(codes.class.getName()).log(Level.SEVERE, null, ex);
+           String csvFilePath = "data.csv";
+         
+        try (
+                Connection connection = dbconn.ConnectDB();) {
+            String sql = "SELECT * FROM codi";
+             
+            Statement statement = connection.createStatement();
+             
+            ResultSet result = statement.executeQuery(sql);
+             
+            BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
+             
+            // write header line containing column names       
+            fileWriter.write("id,cd1,cd2,fname,lname,datd,univ");
+             
+            while (result.next()) {
+                String idd = result.getString("id");
+                String c1 = result.getString("cd1");
+                String c2 = result.getString("cd2");
+                String fnam = result.getString("fname");
+                String lnam = result.getString("lname");
+                String datde = result.getString("datd");
+                String unive = result.getString("univ");
+                String line;
+                line = String.format("%s,%s,%s,%s,%s,%s,%s",
+                        idd, c1, c2, fnam, lnam, datde,unive);
+                 
+                fileWriter.newLine();
+                fileWriter.write(line);            
+            }
+            statement.close();
+            fileWriter.close();            
+        } catch (SQLException e) {
+            System.out.println("Datababse error:");
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            System.out.println("File IO error:");
+            e.printStackTrace();    }
+        
+        
+         try {
+            boolean print = tablee.print();
+            if (!print) {
+                JOptionPane.showMessageDialog(null, "Unable To Print !!..");
+            }
+        } catch (PrinterException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_DownloadButtonActionPerformed
 
